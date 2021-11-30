@@ -37,7 +37,7 @@
 
 /* Provide C++ Compatibility */
 int dividir_umbrales(uint16_t valor);
-void definir_umbral(void);
+//void definir_umbral(void);
 void relacion_adc_acelerometro_brusco(void);
 void relacion_adc_acelerometro_choque(void);
 void UMBRAL(int param);
