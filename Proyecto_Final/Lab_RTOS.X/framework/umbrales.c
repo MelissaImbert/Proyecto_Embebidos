@@ -37,41 +37,41 @@ int dividir_umbrales(uint16_t valor){
 }
 
 
-void definir_umbral(void){
-    int numero_de_leds;
-    do{
-    uint16_t value = ANALOG_getResult();
-    numero_de_leds=dividir_umbrales(value);
-    
-    switch(numero_de_leds){
-        case 0:
-            ledArray={BLUE,BLACK,BLACK,BLACK,BLACK,BLACK,BLACK,BLACK};
-            break;
-        case 1:
-            ledArray={BLUE,BLUE,BLACK,BLACK,BLACK,BLACK,BLACK,BLACK};
-            break;
-        case 2:
-            ledArray={BLUE,BLUE,BLUE,BLACK,BLACK,BLACK,BLACK,BLACK};
-            break;
-        case 3:
-            ledArray={BLUE,BLUE,BLUE,BLUE,BLACK,BLACK,BLACK,BLACK};
-            break;
-        case 4:
-            ledArray={BLUE,BLUE,BLUE,BLUE,BLUE,BLACK,BLACK,BLACK};
-            break;    
-        case 5:
-            ledArray={BLUE,BLUE,BLUE,BLUE,BLUE,BLUE,BLACK,BLACK};
-            break;
-        case 6:
-            ledArray={BLUE,BLUE,BLUE,BLUE,BLUE,BLUE,BLUE,BLACK};
-            break;    
-        case 7:
-            ledArray={BLUE,BLUE,BLUE,BLUE,BLUE,BLUE,BLUE,BLUE};
-            break;    
-          }
-        WS2812_send(ledArray, LED_QTY_IN_ARRAY);   
-        } while (BOTON = 1);  //interrupcion de boton distinto del de interfaz para indicar confirmacion de valor     
-    }
+//void definir_umbral(void){
+//    int numero_de_leds;
+//    do{
+//    uint16_t value = ANALOG_getResult();
+//    numero_de_leds=dividir_umbrales(value);
+//    
+//    switch(numero_de_leds){
+//        case 0:
+//            ledArray={BLUE,BLACK,BLACK,BLACK,BLACK,BLACK,BLACK,BLACK};
+//            break;
+//        case 1:
+//            ledArray={BLUE,BLUE,BLACK,BLACK,BLACK,BLACK,BLACK,BLACK};
+//            break;
+//        case 2:
+//            ledArray={BLUE,BLUE,BLUE,BLACK,BLACK,BLACK,BLACK,BLACK};
+//            break;
+//        case 3:
+//            ledArray={BLUE,BLUE,BLUE,BLUE,BLACK,BLACK,BLACK,BLACK};
+//            break;
+//        case 4:
+//            ledArray={BLUE,BLUE,BLUE,BLUE,BLUE,BLACK,BLACK,BLACK};
+//            break;    
+//        case 5:
+//            ledArray={BLUE,BLUE,BLUE,BLUE,BLUE,BLUE,BLACK,BLACK};
+//            break;
+//        case 6:
+//            ledArray={BLUE,BLUE,BLUE,BLUE,BLUE,BLUE,BLUE,BLACK};
+//            break;    
+//        case 7:
+//            ledArray={BLUE,BLUE,BLUE,BLUE,BLUE,BLUE,BLUE,BLUE};
+//            break;    
+//          }
+//        WS2812_send(ledArray, LED_QTY_IN_ARRAY);   
+//        } while (BOTON = 1);  //interrupcion de boton distinto del de interfaz para indicar confirmacion de valor     
+//}
 
 
 //6535 ---- 10
