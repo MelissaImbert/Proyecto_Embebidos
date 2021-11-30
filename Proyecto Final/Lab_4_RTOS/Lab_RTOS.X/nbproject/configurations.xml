@@ -57,12 +57,14 @@
         <itemPath>mcc_generated_files/spi1.h</itemPath>
         <itemPath>mcc_generated_files/cdac.h</itemPath>
         <itemPath>mcc_generated_files/adc1.h</itemPath>
+        <itemPath>mcc_generated_files/tmr2.h</itemPath>
       </logicalFolder>
       <logicalFolder name="platform" displayName="platform" projectFiles="true">
         <logicalFolder name="LIS3DH" displayName="LIS3DH" projectFiles="true">
           <itemPath>platform/LIS3DH/LIS3DH.h</itemPath>
         </logicalFolder>
         <itemPath>platform/WS2812.h</itemPath>
+        <itemPath>platform/utils.h</itemPath>
       </logicalFolder>
       <itemPath>FreeRTOSConfig.h</itemPath>
     </logicalFolder>
@@ -120,12 +122,14 @@
         <itemPath>mcc_generated_files/spi1.c</itemPath>
         <itemPath>mcc_generated_files/cdac.c</itemPath>
         <itemPath>mcc_generated_files/adc1.c</itemPath>
+        <itemPath>mcc_generated_files/tmr2.c</itemPath>
       </logicalFolder>
       <logicalFolder name="platform" displayName="platform" projectFiles="true">
         <logicalFolder name="LIS3DH" displayName="LIS3DH" projectFiles="true">
           <itemPath>platform/LIS3DH/LIS3DH.c</itemPath>
         </logicalFolder>
         <itemPath>platform/WS2812.c</itemPath>
+        <itemPath>platform/utils.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
     </logicalFolder>
