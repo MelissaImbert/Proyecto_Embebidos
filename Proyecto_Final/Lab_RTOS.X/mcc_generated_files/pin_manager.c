@@ -56,32 +56,34 @@
 /**
  Section: File specific functions
 */
+void (*BTN2_InterruptHandler)(void) = NULL;
 void (*ACC_INT1_InterruptHandler)(void) = NULL;
+void (*BTN1_InterruptHandler)(void) = NULL;
 
 /**
  Section: Driver Interface Function Definitions
 */
 void PIN_MANAGER_Initialize (void)
 {
-    /**************************
+    /****************************************************************************
      * Setting the Output Latch SFR(s)
-     *************************/
+     ***************************************************************************/
     LATA = 0x0002;
     LATB = 0x0000;
     LATC = 0x0000;
     LATD = 0x0000;
 
-    /**************************
+    /****************************************************************************
      * Setting the GPIO Direction SFR(s)
-     *************************/
-    TRISA = 0xFB75;
+     ***************************************************************************/
+    TRISA = 0xFF75;
     TRISB = 0xAFFF;
     TRISC = 0xCFFF;
     TRISD = 0x001A;
 
-    /**************************
+    /****************************************************************************
      * Setting the Weak Pull Up and Weak Pull Down SFR(s)
-     *************************/
+     ***************************************************************************/
     CNPDA = 0x2000;
     CNPDB = 0x8000;
     CNPDC = 0x0000;
@@ -91,116 +93,79 @@ void PIN_MANAGER_Initialize (void)
     CNPUC = 0x0000;
     CNPUD = 0x0000;
 
-    /**************************
+    /****************************************************************************
      * Setting the Open Drain SFR(s)
-     *************************/
+     ***************************************************************************/
     ODCA = 0x0000;
     ODCB = 0x0000;
     ODCC = 0x0000;
     ODCD = 0x0000;
 
-    /**************************
+    /****************************************************************************
      * Setting the Analog/Digital Configuration SFR(s)
-     *************************/
+     ***************************************************************************/
     ANSELA = 0x1000;
     ANSELB = 0x601C;
     ANSELC = 0x0123;
 
 
-    /**************************
+    /****************************************************************************
      * Interrupt On Change: positive
-     *************************/
+     ***************************************************************************/
+    CNEN0Abits.CNIE0A13 = 1;    //Pin : RA13
+    CNEN0Bbits.CNIE0B15 = 1;    //Pin : RB15
     CNEN0Bbits.CNIE0B7 = 1;    //Pin : RB7
-    /**************************
+    /****************************************************************************
      * Interrupt On Change: flag
-     *************************/
+     ***************************************************************************/
+    CNFAbits.CNFA13 = 0;    //Pin : RA13
+    CNFBbits.CNFB15 = 0;    //Pin : RB15
     CNFBbits.CNFB7 = 0;    //Pin : RB7
-    /**************************
+    /****************************************************************************
      * Interrupt On Change: config
-     *************************/
+     ***************************************************************************/
     CNCONBbits.CNSTYLE = 1;    //Config for PORTB
     CNCONBbits.ON = 1;    //Config for PORTB
     
     /* Initialize IOC Interrupt Handler*/
+    BTN2_SetInterruptHandler(&BTN2_CallBack);
     ACC_INT1_SetInterruptHandler(&ACC_INT1_CallBack);
+    BTN1_SetInterruptHandler(&BTN1_CallBack);
     
-    /**************************
+    /****************************************************************************
      * Interrupt On Change: Interrupt Enable
-     *************************/
+     ***************************************************************************/
+    IFS0CLR= 1 << _IFS0_CNAIF_POSITION; //Clear CNAI interrupt flag
+    IEC0bits.CNAIE = 1; //Enable CNAI interrupt
     IFS0CLR= 1 << _IFS0_CNBIF_POSITION; //Clear CNBI interrupt flag
     IEC0bits.CNBIE = 1; //Enable CNBI interrupt
-//    /****************************************************************************
-//     * Setting the Output Latch SFR(s)
-//     ***************************************************************************/
-//    LATA = 0x0002;
-//    LATB = 0x0000;
-//    LATC = 0x0000;
-//    LATD = 0x0000;
-//
-//    /****************************************************************************
-//     * Setting the GPIO Direction SFR(s)
-//     ***************************************************************************/
-//    TRISA = 0xFF75;
-//    TRISB = 0xAFFF;
-//    TRISC = 0xCFFF;
-//    TRISD = 0x001A;
-//
-//    /****************************************************************************
-//     * Setting the Weak Pull Up and Weak Pull Down SFR(s)
-//     ***************************************************************************/
-//    CNPDA = 0x2000;
-//    CNPDB = 0x8000;
-//    CNPDC = 0x0000;
-//    CNPDD = 0x0000;
-//    CNPUA = 0x0000;
-//    CNPUB = 0x0000;
-//    CNPUC = 0x0000;
-//    CNPUD = 0x0000;
-//
-//    /****************************************************************************
-//     * Setting the Open Drain SFR(s)
-//     ***************************************************************************/
-//    ODCA = 0x0000;
-//    ODCB = 0x0000;
-//    ODCC = 0x0000;
-//    ODCD = 0x0000;
-//
-//    /****************************************************************************
-//     * Setting the Analog/Digital Configuration SFR(s)
-//     ***************************************************************************/
-//    ANSELA = 0x1000;
-//    ANSELB = 0x601C;
-//    ANSELC = 0x0123;
-//
-//
-//    /****************************************************************************
-//     * Interrupt On Change: positive
-//     ***************************************************************************/
-//    CNEN0Bbits.CNIE0B7 = 1;    //Pin : RB7
-//    /****************************************************************************
-//     * Interrupt On Change: flag
-//     ***************************************************************************/
-//    CNFBbits.CNFB7 = 0;    //Pin : RB7
-//    /****************************************************************************
-//     * Interrupt On Change: config
-//     ***************************************************************************/
-//    CNCONBbits.CNSTYLE = 1;    //Config for PORTB
-//    CNCONBbits.ON = 1;    //Config for PORTB
-//    
-//    /* Initialize IOC Interrupt Handler*/
-//    ACC_INT1_SetInterruptHandler(&ACC_INT1_CallBack);
-//    
-//    /****************************************************************************
-//     * Interrupt On Change: Interrupt Enable
-//     ***************************************************************************/
-//    IFS0CLR= 1 << _IFS0_CNBIF_POSITION; //Clear CNBI interrupt flag
-//    IEC0bits.CNBIE = 1; //Enable CNBI interrupt
 }
 
+void __attribute__ ((weak)) BTN2_CallBack(void)
+{
+
+}
 
 void __attribute__ ((weak)) ACC_INT1_CallBack(void)
 {
 
+}
+
+void __attribute__ ((weak)) BTN1_CallBack(void)
+{
+
+}
+
+void BTN2_SetInterruptHandler(void (* InterruptHandler)(void))
+{ 
+    IEC0bits.CNAIE = 0; //Disable CNAI interrupt
+    BTN2_InterruptHandler = InterruptHandler; 
+    IEC0bits.CNAIE = 1; //Enable CNAI interrupt
+}
+
+void BTN2_SetIOCInterruptHandler(void *handler)
+{ 
+    BTN2_SetInterruptHandler(handler);
 }
 
 void ACC_INT1_SetInterruptHandler(void (* InterruptHandler)(void))
@@ -213,6 +178,38 @@ void ACC_INT1_SetInterruptHandler(void (* InterruptHandler)(void))
 void ACC_INT1_SetIOCInterruptHandler(void *handler)
 { 
     ACC_INT1_SetInterruptHandler(handler);
+}
+
+void BTN1_SetInterruptHandler(void (* InterruptHandler)(void))
+{ 
+    IEC0bits.CNBIE = 0; //Disable CNBI interrupt
+    BTN1_InterruptHandler = InterruptHandler; 
+    IEC0bits.CNBIE = 1; //Enable CNBI interrupt
+}
+
+void BTN1_SetIOCInterruptHandler(void *handler)
+{ 
+    BTN1_SetInterruptHandler(handler);
+}
+
+/* Interrupt service routine for the CNAI interrupt. */
+void __attribute__ ((vector(_CHANGE_NOTICE_A_VECTOR), interrupt(IPL1SOFT))) _CHANGE_NOTICE_A( void )
+{
+    if(IFS0bits.CNAIF == 1)
+    {
+        if(CNFAbits.CNFA13 == 1)
+        {
+            if(BTN2_InterruptHandler) 
+            { 
+                BTN2_InterruptHandler(); 
+            }
+            
+            CNFACLR = 0x2000;  //Clear CNFAbits.CNFA13
+        }
+        
+        // Clear the flag
+        IFS0CLR= 1 << _IFS0_CNAIF_POSITION; // Clear IFS0bits.CNAIF
+    }
 }
 
 /* Interrupt service routine for the CNBI interrupt. */
@@ -228,6 +225,16 @@ void __attribute__ ((vector(_CHANGE_NOTICE_B_VECTOR), interrupt(IPL1SOFT))) _CHA
             }
             
             CNFBCLR = 0x80;  //Clear CNFBbits.CNFB7
+        }
+        
+        if(CNFBbits.CNFB15 == 1)
+        {
+            if(BTN1_InterruptHandler) 
+            { 
+                BTN1_InterruptHandler(); 
+            }
+            
+            CNFBCLR = 0x8000;  //Clear CNFBbits.CNFB15
         }
         
         // Clear the flag

@@ -1692,370 +1692,6 @@ inline static void ACC_INT2_SetValue(bool value)
 
 */
 #define ACC_INT2_SetDigitalOutput()   ( TRISBCLR = (1 << 8) )
-/**
-  @Summary
-    Sets the GPIO pin, RC13, high using LATC13.
-
-  @Description
-    Sets the GPIO pin, RC13, high using LATC13.
-
-  @Preconditions
-    The RC13 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Set RC13 high (1)
-    ACC_SCK_SetHigh();
-    </code>
-
-*/
-#define ACC_SCK_SetHigh()          ( LATCSET = (1 << 13) )
-/**
-  @Summary
-    Sets the GPIO pin, RC13, low using LATC13.
-
-  @Description
-    Sets the GPIO pin, RC13, low using LATC13.
-
-  @Preconditions
-    The RC13 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Set RC13 low (0)
-    ACC_SCK_SetLow();
-    </code>
-
-*/
-#define ACC_SCK_SetLow()           ( LATCCLR = (1 << 13) )
-
-/**
-  @Summary
-    Sets a value to the GPIO pin.
-
-  @Description
-    Sets or Resets the GPIO pin, RC13, low or high using LATC13.
-
-  @Preconditions
-    The RC13 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    bool value; : value to be set to the GPIO pin.
-
-  @Example
-    <code>
-    // Set RC13 to low.
-    ACC_SCK_SetValue(false);
-    </code>
-
-*/
-inline static void ACC_SCK_SetValue(bool value)
-{
-  if(value)
-  {
-    ACC_SCK_SetHigh();
-  }
-  else
-  {
-    ACC_SCK_SetLow();
-  }
-}
-
-/**
-  @Summary
-    Toggles the GPIO pin, RC13, using LATC13.
-
-  @Description
-    Toggles the GPIO pin, RC13, using LATC13.
-
-  @Preconditions
-    The RC13 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Toggle RC13
-    ACC_SCK_Toggle();
-    </code>
-
-*/
-#define ACC_SCK_Toggle()           ( LATCINV = (1 << 13) )
-/**
-  @Summary
-    Reads the value of the GPIO pin, RC13.
-
-  @Description
-    Reads the value of the GPIO pin, RC13.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    uint16_t portValue;
-
-    // Read RC13
-    postValue = ACC_SCK_GetValue();
-    </code>
-
-*/
-#define ACC_SCK_GetValue()         PORTCbits.RC13
-/**
-  @Summary
-    Configures the GPIO pin, RC13, as an input.
-
-  @Description
-    Configures the GPIO pin, RC13, as an input.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Sets the RC13 as an input
-    ACC_SCK_SetDigitalInput();
-    </code>
-
-*/
-#define ACC_SCK_SetDigitalInput()   ( TRISCSET = (1 << 13) )
-/**
-  @Summary
-    Configures the GPIO pin, RC13, as an output.
-
-  @Description
-    Configures the GPIO pin, RC13, as an output.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Sets the RC13 as an output
-    ACC_SCK_SetDigitalOutput();
-    </code>
-
-*/
-#define ACC_SCK_SetDigitalOutput()   ( TRISCCLR = (1 << 13) )
-/**
-  @Summary
-    Sets the GPIO pin, RC5, high using LATC5.
-
-  @Description
-    Sets the GPIO pin, RC5, high using LATC5.
-
-  @Preconditions
-    The RC5 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Set RC5 high (1)
-    channel_POT_SetHigh();
-    </code>
-
-*/
-#define channel_POT_SetHigh()          ( LATCSET = (1 << 5) )
-/**
-  @Summary
-    Sets the GPIO pin, RC5, low using LATC5.
-
-  @Description
-    Sets the GPIO pin, RC5, low using LATC5.
-
-  @Preconditions
-    The RC5 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Set RC5 low (0)
-    channel_POT_SetLow();
-    </code>
-
-*/
-#define channel_POT_SetLow()           ( LATCCLR = (1 << 5) )
-
-/**
-  @Summary
-    Sets a value to the GPIO pin.
-
-  @Description
-    Sets or Resets the GPIO pin, RC5, low or high using LATC5.
-
-  @Preconditions
-    The RC5 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    bool value; : value to be set to the GPIO pin.
-
-  @Example
-    <code>
-    // Set RC5 to low.
-    channel_POT_SetValue(false);
-    </code>
-
-*/
-inline static void channel_POT_SetValue(bool value)
-{
-  if(value)
-  {
-    channel_POT_SetHigh();
-  }
-  else
-  {
-    channel_POT_SetLow();
-  }
-}
-
-/**
-  @Summary
-    Toggles the GPIO pin, RC5, using LATC5.
-
-  @Description
-    Toggles the GPIO pin, RC5, using LATC5.
-
-  @Preconditions
-    The RC5 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Toggle RC5
-    channel_POT_Toggle();
-    </code>
-
-*/
-#define channel_POT_Toggle()           ( LATCINV = (1 << 5) )
-/**
-  @Summary
-    Reads the value of the GPIO pin, RC5.
-
-  @Description
-    Reads the value of the GPIO pin, RC5.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    uint16_t portValue;
-
-    // Read RC5
-    postValue = channel_POT_GetValue();
-    </code>
-
-*/
-#define channel_POT_GetValue()         PORTCbits.RC5
-/**
-  @Summary
-    Configures the GPIO pin, RC5, as an input.
-
-  @Description
-    Configures the GPIO pin, RC5, as an input.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Sets the RC5 as an input
-    channel_POT_SetDigitalInput();
-    </code>
-
-*/
-#define channel_POT_SetDigitalInput()   ( TRISCSET = (1 << 5) )
-/**
-  @Summary
-    Configures the GPIO pin, RC5, as an output.
-
-  @Description
-    Configures the GPIO pin, RC5, as an output.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Sets the RC5 as an output
-    channel_POT_SetDigitalOutput();
-    </code>
-
-*/
-#define channel_POT_SetDigitalOutput()   ( TRISCCLR = (1 << 5) )
 
 /**
     Section: Function Prototypes
@@ -2093,6 +1729,27 @@ void PIN_MANAGER_Initialize (void);
 
 /**
   @Summary
+    Callback for BTN2 Pin.
+
+  @Description
+    This routine is callback for BTN2 Pin
+
+  @Param
+    None.
+
+  @Returns
+    None
+ 
+ 
+  @Example 
+    <code>
+        BTN2_SetInterruptHandler(&BTN2_CallBack);
+    </code>
+*/
+void BTN2_CallBack(void);
+
+/**
+  @Summary
     Callback for ACC_INT1 Pin.
 
   @Description
@@ -2112,6 +1769,67 @@ void PIN_MANAGER_Initialize (void);
 */
 void ACC_INT1_CallBack(void);
 
+/**
+  @Summary
+    Callback for BTN1 Pin.
+
+  @Description
+    This routine is callback for BTN1 Pin
+
+  @Param
+    None.
+
+  @Returns
+    None
+ 
+ 
+  @Example 
+    <code>
+        BTN1_SetInterruptHandler(&BTN1_CallBack);
+    </code>
+*/
+void BTN1_CallBack(void);
+
+
+/**
+  @Summary
+    Assigns a function pointer with a callback address.
+
+  @Description
+    This routine assigns a function pointer with a callback address.
+
+  @Param
+    Address of the callback routine.
+
+  @Returns
+    None
+ 
+  @Example 
+    <code>
+        BTN2_SetInterruptHandler(&BTN2_CallBack);
+    </code>
+*/
+void BTN2_SetInterruptHandler(void (* InterruptHandler)(void));
+
+/**
+  @Summary
+    Assigns a function pointer with a callback address.
+
+  @Description
+    This routine assigns a function pointer with a callback address.
+
+  @Param
+    Address of the callback routine.
+
+  @Returns
+    None
+ 
+  @Example 
+    <code>
+        BTN2_SetIOCInterruptHandler(&BTN2_CallBack);
+    </code>
+*/
+void __attribute__((deprecated("\nThis will be removed in future MCC releases. \nUse BTN2_SetInterruptHandler instead."))) BTN2_SetIOCInterruptHandler(void *handler);
 
 /**
   @Summary
@@ -2155,721 +1873,43 @@ void __attribute__((deprecated("\nThis will be removed in future MCC releases. \
 
 /**
   @Summary
-    Sets the GPIO pin, RC13, high using LATC13.
+    Assigns a function pointer with a callback address.
 
   @Description
-    Sets the GPIO pin, RC13, high using LATC13.
-
-  @Preconditions
-    The RC13 must be set to an output.
-
-  @Returns
-    None.
+    This routine assigns a function pointer with a callback address.
 
   @Param
-    None.
-
-  @Example
-    <code>
-    // Set RC13 high (1)
-    ACC_SCK_SetHigh();
-    </code>
-
- */
-
-#define ACC_MOSI_SetHigh()          ( LATDSET = (1 << 0) )
-/**
-  @Summary
-    Sets the GPIO pin, RD0, low using LATD0.
-
-  @Description
-    Sets the GPIO pin, RD0, low using LATD0.
-
-  @Preconditions
-    The RD0 must be set to an output.
+    Address of the callback routine.
 
   @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
+    None
+ 
+  @Example 
     <code>
-    // Set RD0 low (0)
-    ACC_MOSI_SetLow();
+        BTN1_SetInterruptHandler(&BTN1_CallBack);
     </code>
-
- */
-#define ACC_MOSI_SetLow()           ( LATDCLR = (1 << 0) )
-
-/**
-  @Summary
-    Sets a value to the GPIO pin.
-
-  @Description
-    Sets or Resets the GPIO pin, RD0, low or high using LATD0.
-
-  @Preconditions
-    The RD0 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    bool value; : value to be set to the GPIO pin.
-
-  @Example
-    <code>
-    // Set RD0 to low.
-    ACC_MOSI_SetValue(false);
-    </code>
-
- */
-inline static void ACC_MOSI_SetValue(bool value) {
-    if (value) {
-        ACC_MOSI_SetHigh();
-    } else {
-        ACC_MOSI_SetLow();
-    }
-}
-
-/**
-  @Summary
-    Toggles the GPIO pin, RD0, using LATD0.
-
-  @Description
-    Toggles the GPIO pin, RD0, using LATD0.
-
-  @Preconditions
-    The RD0 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Toggle RD0
-    ACC_MOSI_Toggle();
-    </code>
-
- */
-#define ACC_MOSI_Toggle()           ( LATDINV = (1 << 0) )
-/**
-  @Summary
-    Reads the value of the GPIO pin, RD0.
-
-  @Description
-    Reads the value of the GPIO pin, RD0.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    uint16_t portValue;
-
-    // Read RD0
-    postValue = ACC_MOSI_GetValue();
-    </code>
-
- */
-#define ACC_MOSI_GetValue()         PORTDbits.RD0
-/**
-  @Summary
-    Configures the GPIO pin, RD0, as an input.
-
-  @Description
-    Configures the GPIO pin, RD0, as an input.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Sets the RD0 as an input
-    ACC_MOSI_SetDigitalInput();
-    </code>
-
- */
-#define ACC_MOSI_SetDigitalInput()   ( TRISDSET = (1 << 0) )
-/**
-  @Summary
-    Configures the GPIO pin, RD0, as an output.
-
-  @Description
-    Configures the GPIO pin, RD0, as an output.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Sets the RD0 as an output
-    ACC_MOSI_SetDigitalOutput();
-    </code>
-
- */
-#define ACC_MOSI_SetDigitalOutput()   ( TRISDCLR = (1 << 0) )
-/**
-  @Summary
-    Sets the GPIO pin, RD2, high using LATD2.
-
-  @Description
-    Sets the GPIO pin, RD2, high using LATD2.
-
-  @Preconditions
-    The RD2 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Set RD2 high (1)
-    ACC_CS_SetHigh();
-    </code>
-
- */
-#define ACC_CS_SetHigh()          ( LATDSET = (1 << 2) )
-/**
-  @Summary
-    Sets the GPIO pin, RD2, low using LATD2.
-
-  @Description
-    Sets the GPIO pin, RD2, low using LATD2.
-
-  @Preconditions
-    The RD2 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Set RD2 low (0)
-    ACC_CS_SetLow();
-    </code>
-
- */
-#define ACC_CS_SetLow()           ( LATDCLR = (1 << 2) )
-
-/**
-  @Summary
-    Sets a value to the GPIO pin.
-
-  @Description
-    Sets or Resets the GPIO pin, RD2, low or high using LATD2.
-
-  @Preconditions
-    The RD2 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    bool value; : value to be set to the GPIO pin.
-
-  @Example
-    <code>
-    // Set RD2 to low.
-    ACC_CS_SetValue(false);
-    </code>
-
- */
-inline static void ACC_CS_SetValue(bool value) {
-    if (value) {
-        ACC_CS_SetHigh();
-    } else {
-        ACC_CS_SetLow();
-    }
-}
-
-/**
-  @Summary
-    Toggles the GPIO pin, RD2, using LATD2.
-
-  @Description
-    Toggles the GPIO pin, RD2, using LATD2.
-
-  @Preconditions
-    The RD2 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Toggle RD2
-    ACC_CS_Toggle();
-    </code>
-
- */
-#define ACC_CS_Toggle()           ( LATDINV = (1 << 2) )
-/**
-  @Summary
-    Reads the value of the GPIO pin, RD2.
-
-  @Description
-    Reads the value of the GPIO pin, RD2.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    uint16_t portValue;
-
-    // Read RD2
-    postValue = ACC_CS_GetValue();
-    </code>
-
- */
-#define ACC_CS_GetValue()         PORTDbits.RD2
-/**
-  @Summary
-    Configures the GPIO pin, RD2, as an input.
-
-  @Description
-    Configures the GPIO pin, RD2, as an input.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Sets the RD2 as an input
-    ACC_CS_SetDigitalInput();
-    </code>
-
- */
-#define ACC_CS_SetDigitalInput()   ( TRISDSET = (1 << 2) )
-/**
-  @Summary
-    Configures the GPIO pin, RD2, as an output.
-
-  @Description
-    Configures the GPIO pin, RD2, as an output.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Sets the RD2 as an output
-    ACC_CS_SetDigitalOutput();
-    </code>
-
- */
-#define ACC_CS_SetDigitalOutput()   ( TRISDCLR = (1 << 2) )
-/**
-  @Summary
-    Sets the GPIO pin, RD4, high using LATD4.
-
-  @Description
-    Sets the GPIO pin, RD4, high using LATD4.
-
-  @Preconditions
-    The RD4 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Set RD4 high (1)
-    ACC_MISO_SetHigh();
-    </code>
-
- */
-#define ACC_MISO_SetHigh()          ( LATDSET = (1 << 4) )
-/**
-  @Summary
-    Sets the GPIO pin, RD4, low using LATD4.
-
-  @Description
-    Sets the GPIO pin, RD4, low using LATD4.
-
-  @Preconditions
-    The RD4 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Set RD4 low (0)
-    ACC_MISO_SetLow();
-    </code>
-
- */
-#define ACC_MISO_SetLow()           ( LATDCLR = (1 << 4) )
-
-/**
-  @Summary
-    Sets a value to the GPIO pin.
-
-  @Description
-    Sets or Resets the GPIO pin, RD4, low or high using LATD4.
-
-  @Preconditions
-    The RD4 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    bool value; : value to be set to the GPIO pin.
-
-  @Example
-    <code>
-    // Set RD4 to low.
-    ACC_MISO_SetValue(false);
-    </code>
-
- */
-inline static void ACC_MISO_SetValue(bool value) {
-    if (value) {
-        ACC_MISO_SetHigh();
-    } else {
-        ACC_MISO_SetLow();
-    }
-}
-
-/**
-  @Summary
-    Toggles the GPIO pin, RD4, using LATD4.
-
-  @Description
-    Toggles the GPIO pin, RD4, using LATD4.
-
-  @Preconditions
-    The RD4 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Toggle RD4
-    ACC_MISO_Toggle();
-    </code>
-
- */
-#define ACC_MISO_Toggle()           ( LATDINV = (1 << 4) )
-/**
-  @Summary
-    Reads the value of the GPIO pin, RD4.
-
-  @Description
-    Reads the value of the GPIO pin, RD4.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    uint16_t portValue;
-
-    // Read RD4
-    postValue = ACC_MISO_GetValue();
-    </code>
-
- */
-#define ACC_MISO_GetValue()         PORTDbits.RD4
-/**
-  @Summary
-    Configures the GPIO pin, RD4, as an input.
-
-  @Description
-    Configures the GPIO pin, RD4, as an input.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Sets the RD4 as an input
-    ACC_MISO_SetDigitalInput();
-    </code>
-
- */
-#define ACC_MISO_SetDigitalInput()   ( TRISDSET = (1 << 4) )
-/**
-  @Summary
-    Configures the GPIO pin, RD4, as an output.
-
-  @Description
-    Configures the GPIO pin, RD4, as an output.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Sets the RD4 as an output
-    ACC_MISO_SetDigitalOutput();
-    </code>
-
- */
-#define ACC_MISO_SetDigitalOutput()   ( TRISDCLR = (1 << 4) )
-
-/**
-  @Summary
-    Sets the GPIO pin, RA13, high using LATA13.
-
-  @Description
-    Sets the GPIO pin, RA13, high using LATA13.
-
-  @Preconditions
-    The RA13 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Set RA13 high (1)
-    BTN2_SetHigh();
-    </code>
-
 */
-
-#define LED_CTRL_SetHigh()          ( LATASET = (1 << 10) )
-/**
-  @Summary
-    Sets the GPIO pin, RA10, low using LATA10.
-
-  @Description
-    Sets the GPIO pin, RA10, low using LATA10.
-
-  @Preconditions
-    The RA10 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Set RA10 low (0)
-    LED_CTRL_SetLow();
-    </code>
-
-*/
-#define LED_CTRL_SetLow()           ( LATACLR = (1 << 10) )
+void BTN1_SetInterruptHandler(void (* InterruptHandler)(void));
 
 /**
   @Summary
-    Sets a value to the GPIO pin.
+    Assigns a function pointer with a callback address.
 
   @Description
-    Sets or Resets the GPIO pin, RA10, low or high using LATA10.
-
-  @Preconditions
-    The RA10 must be set to an output.
-
-  @Returns
-    None.
+    This routine assigns a function pointer with a callback address.
 
   @Param
-    bool value; : value to be set to the GPIO pin.
-
-  @Example
-    <code>
-    // Set RA10 to low.
-    LED_CTRL_SetValue(false);
-    </code>
-
-*/
-inline static void LED_CTRL_SetValue(bool value)
-{
-  if(value)
-  {
-    LED_CTRL_SetHigh();
-  }
-  else
-  {
-    LED_CTRL_SetLow();
-  }
-}
-
-/**
-  @Summary
-    Toggles the GPIO pin, RA10, using LATA10.
-
-  @Description
-    Toggles the GPIO pin, RA10, using LATA10.
-
-  @Preconditions
-    The RA10 must be set to an output.
+    Address of the callback routine.
 
   @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
+    None
+ 
+  @Example 
     <code>
-    // Toggle RA10
-    LED_CTRL_Toggle();
+        BTN1_SetIOCInterruptHandler(&BTN1_CallBack);
     </code>
-
 */
-#define LED_CTRL_Toggle()           ( LATAINV = (1 << 10) )
-/**
-  @Summary
-    Reads the value of the GPIO pin, RA10.
+void __attribute__((deprecated("\nThis will be removed in future MCC releases. \nUse BTN1_SetInterruptHandler instead."))) BTN1_SetIOCInterruptHandler(void *handler);
 
-  @Description
-    Reads the value of the GPIO pin, RA10.
 
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    uint16_t portValue;
-
-    // Read RA10
-    postValue = LED_CTRL_GetValue();
-    </code>
-
-*/
-#define LED_CTRL_GetValue()         PORTAbits.RA10
-/**
-  @Summary
-    Configures the GPIO pin, RA10, as an input.
-
-  @Description
-    Configures the GPIO pin, RA10, as an input.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Sets the RA10 as an input
-    LED_CTRL_SetDigitalInput();
-    </code>
-
-*/
-#define LED_CTRL_SetDigitalInput()   ( TRISASET = (1 << 10) )
-/**
-  @Summary
-    Configures the GPIO pin, RA10, as an output.
-
-  @Description
-    Configures the GPIO pin, RA10, as an output.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Sets the RA10 as an output
-    LED_CTRL_SetDigitalOutput();
-    </code>
-
-*/
-#define LED_CTRL_SetDigitalOutput()   ( TRISACLR = (1 << 10) )
 #endif
