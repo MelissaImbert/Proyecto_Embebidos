@@ -31,7 +31,7 @@
 /* ************************************************************************** */
 extern SemaphoreHandle_t xpuedoEnviar;
 extern SemaphoreHandle_t xpuedoRecibir;
-//extern SemaphoreHandle_t xopenInterface;
+extern SemaphoreHandle_t xopenInterface;
 
 typedef enum {
     DOWNLOAD,
@@ -49,7 +49,7 @@ typedef enum {
  */
 void _puedoEnviar(void *p_param);
 void puedoRecibir(void *p_param);
-void interface(void *p_param);
+void interface(void);
 void initInterface(void *p_param);
 /* TODO:  Include other files here if needed. */
 

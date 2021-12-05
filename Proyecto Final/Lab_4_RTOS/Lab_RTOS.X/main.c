@@ -77,7 +77,7 @@ int main(void)
     xAccel = xSemaphoreCreateMutex();
     xpuedoEnviar = xSemaphoreCreateBinary();
     xpuedoRecibir = xSemaphoreCreateBinary();
-    //xopenInterface = xSemaphoreCreateBinary();
+    xopenInterface = xSemaphoreCreateBinary();
     /* Create the tasks defined within this file. */
     //xTaskCreate( blinkLED, "task1", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+1, NULL );
     xTaskCreate( SIM808_initModule, "modemIni", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+2, &modemInitHandle );
