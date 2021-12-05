@@ -2872,4 +2872,6 @@ inline static void LED_CTRL_SetValue(bool value)
 
 */
 #define LED_CTRL_SetDigitalOutput()   ( TRISACLR = (1 << 10) )
+
+
 #endif

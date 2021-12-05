@@ -47,8 +47,9 @@
  */
 
 /* Kernel includes. */
-#include "FreeRTOS.h"
-#include "task.h"
+#include "freeRTOS/include/FreeRTOS.h"
+#include "freeRTOS/include/task.h"
+#include "freeRTOS/include/semphr.h"
 #include "framework/Accelerometer/Accelerometer.h"
 #include "mcc_generated_files/system.h"
 #include "mcc_generated_files/pin_manager.h"
@@ -57,6 +58,9 @@
 #include "framework/GPS.h"
 #include "framework/SIM808.h"
 #include "data_save.h"
+#include "framework/Analog/Analog.h"
+#include "framework/umbrales.h"
+#include "framework/UserInterface.h"
 //void blinkLED( void *p_param );
 /*
                          Main application
@@ -70,11 +74,17 @@ int main(void)
     ACCEL_init();
     Array_Colors();
     xAccel = xSemaphoreCreateMutex();
+    xpuedoEnviar = xSemaphoreCreateBinary();
+    xpuedoRecibir = xSemaphoreCreateBinary();
+    //xopenInterface = xSemaphoreCreateBinary();
     /* Create the tasks defined within this file. */
     //xTaskCreate( blinkLED, "task1", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+1, NULL );
     xTaskCreate( SIM808_initModule, "modemIni", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+2, &modemInitHandle );
     xTaskCreate( SIM808_taskCheck, "modemTask", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+1, NULL );
-    xTaskCreate( Accel_Testing,"accelerometer", configMINIMAL_STACK_SIZE ,NULL,4,NULL);
+    xTaskCreate( ANALOG_convert, "ADC convert", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+4, NULL );
+    xTaskCreate( initInterface, "interfaz",  configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+3, NULL );
+    //xTaskCreate( Accel_Testing,"accelerometer", configMINIMAL_STACK_SIZE ,NULL,4,NULL);
+    //xTaskCreate( definirUmbral, "interfaz",  configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+3, NULL );
     //El task de arriba si lo pongo andar el programa muere
     /* Finally start the scheduler. */
     vTaskStartScheduler( );

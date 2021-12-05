@@ -18,6 +18,9 @@
         <itemPath>data_save.h</itemPath>
         <itemPath>maniobras.h</itemPath>
         <itemPath>leds.h</itemPath>
+        <itemPath>framework/umbrales.h</itemPath>
+        <itemPath>framework/UserInterface.h</itemPath>
+        <itemPath>framework/usb_framework.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="freeRTOS" projectFiles="true">
         <itemPath>freeRTOS/include/FreeRTOS.h</itemPath>
@@ -57,6 +60,7 @@
         <itemPath>mcc_generated_files/cdac.h</itemPath>
         <itemPath>mcc_generated_files/adc1.h</itemPath>
         <itemPath>mcc_generated_files/tmr2.h</itemPath>
+        <itemPath>mcc_generated_files/adc_module_features.h</itemPath>
       </logicalFolder>
       <logicalFolder name="platform" displayName="platform" projectFiles="true">
         <logicalFolder name="LIS3DH" displayName="LIS3DH" projectFiles="true">
@@ -64,6 +68,7 @@
         </logicalFolder>
         <itemPath>platform/WS2812.h</itemPath>
         <itemPath>platform/utils.h</itemPath>
+        <itemPath>platform/buttons.h</itemPath>
       </logicalFolder>
       <itemPath>FreeRTOSConfig.h</itemPath>
     </logicalFolder>
@@ -88,6 +93,9 @@
         <itemPath>maniobras.c</itemPath>
         <itemPath>data_save.c</itemPath>
         <itemPath>leds.c</itemPath>
+        <itemPath>framework/umbrales.c</itemPath>
+        <itemPath>framework/UserInterface.c</itemPath>
+        <itemPath>framework/usb_framework.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="freeRTOS" projectFiles="true">
         <itemPath>freeRTOS/croutine.c</itemPath>
@@ -128,6 +136,7 @@
         </logicalFolder>
         <itemPath>platform/WS2812.c</itemPath>
         <itemPath>platform/utils.c</itemPath>
+        <itemPath>platform/buttons.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
     </logicalFolder>
@@ -395,6 +404,10 @@
         <property key="toolpack.updateoptions.packversion"
                   value="Press to select which tool pack to use"/>
       </Tool>
+      <item path="platform/buttons.c" ex="true" overriding="false">
+      </item>
+      <item path="platform/buttons.h" ex="true" overriding="false">
+      </item>
       <snap>
         <property key="ADC 1" value="true"/>
         <property key="AutoSelectMemRanges" value="auto"/>

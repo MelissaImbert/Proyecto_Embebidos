@@ -57,7 +57,6 @@
  Section: File specific functions
 */
 void (*ACC_INT1_InterruptHandler)(void) = NULL;
-
 /**
  Section: Driver Interface Function Definitions
 */

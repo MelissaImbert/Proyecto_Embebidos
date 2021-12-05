@@ -15,22 +15,35 @@
  */
 /* ************************************************************************** */
 
-#ifndef _UMBRALES_H    /* Guard against multiple inclusion */
-#define _UMBRALES_H
+#ifndef _USERINTERFACE_H    /* Guard against multiple inclusion */
+#define _USERINTERFACE_H
+
 
 /* ************************************************************************** */
 /* ************************************************************************** */
-/* Section: Included Files                                                    *
- **/
+/* Section: Included Files       */
 #include <stdint.h>
-#include <stdbool.h>
+#include "../freeRTOS/include/FreeRTOS.h"
+#include "../freeRTOS/include/task.h"
+#include "../freeRTOS/include/semphr.h"
 /* ************************************************************************** */
 /* ************************************************************************** */
+extern SemaphoreHandle_t xpuedoEnviar;
+extern SemaphoreHandle_t xpuedoRecibir;
+//extern SemaphoreHandle_t xopenInterface;
 
+typedef enum{
+DOWNLOAD,
+THRESHOLDS,
+PERIOD       
+} MENU_STATES;
 /* This section lists the other files that are included in this file.
  */
-
+void _puedoEnviar(void *p_param);
+void puedoRecibir(void *p_param);
+void interface(void *p_param);
+void initInterface(void *p_param);
 /* TODO:  Include other files here if needed. */
-void definirUmbral(void);
+
 
 #endif 
