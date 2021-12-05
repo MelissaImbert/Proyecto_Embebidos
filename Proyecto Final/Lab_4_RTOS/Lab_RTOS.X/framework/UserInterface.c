@@ -37,13 +37,15 @@ void initInterface(void *p_param) {
     for (;;) {
         //xSemaphoreTake(xopenInterface, portMAX_DELAY);
         if (USB_isReady()) {
-            if (USB_recieve() > 0) {
+            if (BTN1_GetValue()) {
+
+                while (BTN1_GetValue());
                 xTaskCreate(interface, "task3", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 3, NULL);
                 vTaskDelete(NULL);
             }
         }
-        vTaskDelay(pdMS_TO_TICKS(10));
     }
+    vTaskDelay(pdMS_TO_TICKS(10));
 }
 
 void interface(void *p_param) {
@@ -56,7 +58,9 @@ void interface(void *p_param) {
             USB_sendString("\n\nMENÚ PRINCIPAL - Ingrese la opción deseada\n"
                     "1 - Descargar datos\n"
                     "2 - Configurar umbrales\n"
-                    "3 - Configurar periodo de captura de datos\n");
+                    "3 - Configurar periodo de captura de datos\n"
+                    "4 - Salir del Menú\n"
+                    );
 
         }
         xTaskCreate(puedoRecibir, "task4", 100, NULL, 2, NULL);
@@ -84,13 +88,13 @@ void interface(void *p_param) {
 
                         switch (umbral) {
                             case BRUSCO:
-                              /*  xTaskCreate(_puedoEnviar, "task4", 100, NULL, 2, NULL);
-                                if (xSemaphoreTake(xpuedoEnviar, portMAX_DELAY) == pdTRUE) {
-                                    USB_sendString("\n\nConfiguración del umbral para movimiento brusco\n"
-                                            "Gire la perilla del dispositivo hasta el valor que desee, y apriete el botón S2 para indicar que finalizó la configuración\n"
-                                            );
+                                /*  xTaskCreate(_puedoEnviar, "task4", 100, NULL, 2, NULL);
+                                  if (xSemaphoreTake(xpuedoEnviar, portMAX_DELAY) == pdTRUE) {
+                                      USB_sendString("\n\nConfiguración del umbral para movimiento brusco\n"
+                                              "Gire la perilla del dispositivo hasta el valor que desee, y apriete el botón S2 para indicar que finalizó la configuración\n"
+                                              );
 
-                                }*/
+                                  }*/
                                 definirUmbral();
                                 //Umbral =  definirUmbral(); 
                                 break;
@@ -104,6 +108,8 @@ void interface(void *p_param) {
                                 }*/
                                 definirUmbral();
                                 //Umbral =  definirUmbral();
+                                break;
+                            default:
                                 break;
 
                         }
@@ -122,6 +128,9 @@ void interface(void *p_param) {
                         //periodo = atoi(USB_getRxBuffer());
                     }
                     break;
+                    //case LEAVE:
+                    // break;
+
                 default:
                     break;
             }

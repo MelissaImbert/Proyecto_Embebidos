@@ -26,6 +26,7 @@
 #include "../freeRTOS/include/FreeRTOS.h"
 #include "../freeRTOS/include/task.h"
 #include "../freeRTOS/include/semphr.h"
+#include "../mcc_generated_files/pin_manager.h"
 /* ************************************************************************** */
 /* ************************************************************************** */
 extern SemaphoreHandle_t xpuedoEnviar;
@@ -35,7 +36,8 @@ extern SemaphoreHandle_t xpuedoRecibir;
 typedef enum{
 DOWNLOAD,
 THRESHOLDS,
-PERIOD       
+PERIOD,
+LEAVE
 } MENU_STATES;
 
 typedef enum{
