@@ -46,6 +46,7 @@ void definirUmbral(uint8_t umbral_set) {
                 break;
         }
     } while (!BTN1_GetValue());
+    vTaskDelay(pdMS_TO_TICKS(50));
 }
 
 void leds_setting(uint8_t numero_de_leds) {

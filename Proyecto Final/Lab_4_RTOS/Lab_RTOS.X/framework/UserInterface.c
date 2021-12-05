@@ -51,7 +51,7 @@ void interface(void) {
     MENU_STATES state;
     MENU_STATES2 umbral;
     MENU_STATES2 umbral_aux;
-    bool salida = true;
+    bool salida;
     do{
             xTaskCreate(_puedoEnviar, "task4", 100, NULL, 2, NULL);
             if (xSemaphoreTake(xpuedoEnviar, portMAX_DELAY) == pdTRUE) {
@@ -61,7 +61,7 @@ void interface(void) {
                         "3 - Configurar periodo de captura de datos\n"
                         "4 - Salir del Menú\n"
                         );
-
+                salida = true;
             }
             xTaskCreate(puedoRecibir, "task4", 100, NULL, 2, NULL);
             if (xSemaphoreTake(xpuedoRecibir, portMAX_DELAY) == pdTRUE) {
@@ -98,9 +98,7 @@ void interface(void) {
                                     //
                                     break;
                             }
-
                         }
-
                         break;
                     case PERIOD:
                         xTaskCreate(_puedoEnviar, "task4", 100, NULL, 2, NULL);
