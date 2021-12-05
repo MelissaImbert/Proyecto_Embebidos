@@ -229,12 +229,12 @@ static void SIM808_initGPS( void* p_param ) {
 
     while( 1 ) {
         if( xSemaphoreTake(c_semIsModuleOnAndReady, pdMS_TO_TICKS(SIM808_TURN_ON_GSM_TIMEOUT_ms)) == pdTRUE ) {
-            if( (resultExchange = SIM808_exchangeCmd(ATREQ_GPS_PWR_ON, ATRES_OK, SIM808_UART_TIMEOUT_ms, SIM808_MAX_RETRIES)) == true ) {
+            if((resultExchange = SIM808_exchangeCmd(ATREQ_GPS_PWR_ON, ATRES_OK, SIM808_UART_TIMEOUT_ms, SIM808_MAX_RETRIES)) == true ) {
                 if( (resultExchange = SIM808_exchangeCmd(ATREQ_GPS_SEQ_RMC, ATRES_OK, SIM808_UART_TIMEOUT_ms, SIM808_MAX_RETRIES)) == true ) {
                     // Se prendió y seteó la trama RMC
                     xSemaphoreGive(c_semIsModuleOnAndReady); /** Libero el semáforo para que otro pueda hablarle al módulo */
                     xSemaphoreGive(c_semGPSIsReady); /** Habilito el uso de GPS */
-                    xTaskCreate( data_saving, "data_saving", configMINIMAL_STACK_SIZE, NULL,3, NULL);                   
+                    xTaskCreate(data_saving, "data_saving", configMINIMAL_STACK_SIZE, NULL,3, NULL);                   
                     vTaskDelete(initGPSHandle);
                 }
                 else {
