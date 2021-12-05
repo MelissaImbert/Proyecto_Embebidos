@@ -6,6 +6,7 @@
 #include <string.h>
 #include "../freeRTOS/include/FreeRTOS.h"
 #include "../freeRTOS/include/task.h"
+#include "../mcc_generated_files/pin_manager.h"
 //#define LED_QTY_IN_ARRAY 8
 
 static ws2812_t ledArray[LED_QTY_IN_ARRAY];
@@ -109,5 +110,5 @@ void definirUmbral(void){
         }
         WS2812_send(ledArray, LED_QTY_IN_ARRAY);
         vTaskDelay(pdMS_TO_TICKS(10));
-    } while(1);
+    } while(!BTN1_GetValue());
 }
