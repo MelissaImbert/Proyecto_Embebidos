@@ -22,11 +22,7 @@
 /* ************************************************************************** */
 /* ************************************************************************** */
 /* Section: Included Files                                                    */
-#include "framework/GPS.h"
-#include "freeRTOS/include/FreeRTOS.h"
-#include "freeRTOS/include/task.h"
-#include "freeRTOS/include/semphr.h"
-#include "framework/SIM808.h"
+
 #include <stdint.h>
 /* ************************************************************************** */
 /* ************************************************************************** */
@@ -34,6 +30,7 @@
 /* This section lists the other files that are included in this file.
  */
 /* TODO:  Include other files here if needed. */
+void data_saving(void *p_param);
 void data_GPS(void);
 void datalog(void);
 #endif /* _EXAMPLE_FILE_NAME_H */

@@ -21,7 +21,7 @@ void Accel_Testing(void *p_param) {
                 //}
             }
             xSemaphoreGive(xAccel);
-            vTaskDelay(pdMS_TO_TICKS(100)); //Testeo cada 500ms, ver si testear cada menos o mas despues
+            vTaskDelay(pdMS_TO_TICKS(250)); //Testeo cada 500ms, ver si testear cada menos o mas despues
         }
     }
 }

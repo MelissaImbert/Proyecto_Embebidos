@@ -56,6 +56,7 @@
 #include "leds.h"
 #include "framework/GPS.h"
 #include "framework/SIM808.h"
+#include "data_save.h"
 //void blinkLED( void *p_param );
 /*
                          Main application
@@ -71,10 +72,10 @@ int main(void)
     xAccel = xSemaphoreCreateMutex();
     /* Create the tasks defined within this file. */
     //xTaskCreate( blinkLED, "task1", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+1, NULL );
-    xTaskCreate( SIM808_taskCheck, "modemTask", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+1, NULL );
     xTaskCreate( SIM808_initModule, "modemIni", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+2, &modemInitHandle );
-    xTaskCreate( Accel_Testing,"task1", configMINIMAL_STACK_SIZE ,NULL,5,NULL);
-    //xTaskCreate( );
+    xTaskCreate( SIM808_taskCheck, "modemTask", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+1, NULL );
+    xTaskCreate( Accel_Testing,"accelerometer", configMINIMAL_STACK_SIZE ,NULL,4,NULL);
+    //El task de arriba si lo pongo andar el programa muere
     /* Finally start the scheduler. */
     vTaskStartScheduler( );
 
