@@ -33,7 +33,6 @@
 /* This section lists the other files that are included in this file.
  */
 extern float dato;
-extern xSemaphoreHandle xAccel;
 /* TODO:  Include other files here if needed. */
 
 void Accel_Testing(void *p_param);
