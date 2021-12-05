@@ -18,7 +18,6 @@
         <itemPath>data_save.h</itemPath>
         <itemPath>maniobras.h</itemPath>
         <itemPath>leds.h</itemPath>
-        <itemPath>framework/umbrales.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="freeRTOS" projectFiles="true">
         <itemPath>freeRTOS/include/FreeRTOS.h</itemPath>
@@ -89,7 +88,6 @@
         <itemPath>maniobras.c</itemPath>
         <itemPath>data_save.c</itemPath>
         <itemPath>leds.c</itemPath>
-        <itemPath>framework/umbrales.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="freeRTOS" projectFiles="true">
         <itemPath>freeRTOS/croutine.c</itemPath>
