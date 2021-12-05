@@ -37,6 +37,12 @@ DOWNLOAD,
 THRESHOLDS,
 PERIOD       
 } MENU_STATES;
+
+typedef enum{
+BRUSCO,
+CHOQUE
+} MENU_STATES2;
+
 /* This section lists the other files that are included in this file.
  */
 void _puedoEnviar(void *p_param);

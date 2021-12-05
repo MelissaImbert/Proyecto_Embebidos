@@ -38,7 +38,7 @@ void initInterface(void *p_param) {
         //xSemaphoreTake(xopenInterface, portMAX_DELAY);
         if (USB_isReady()) {
             if (USB_recieve() > 0) {
-                xTaskCreate(interface, "task3", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+3, NULL );
+                xTaskCreate(interface, "task3", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 3, NULL);
                 vTaskDelete(NULL);
             }
         }
@@ -48,6 +48,8 @@ void initInterface(void *p_param) {
 
 void interface(void *p_param) {
     MENU_STATES state;
+    MENU_STATES2 umbral;
+    MENU_STATES2 umbral_aux;
     for (;;) {
         xTaskCreate(_puedoEnviar, "task4", 100, NULL, 2, NULL);
         if (xSemaphoreTake(xpuedoEnviar, portMAX_DELAY) == pdTRUE) {
@@ -62,13 +64,63 @@ void interface(void *p_param) {
             state = atoi(USB_getRxBuffer()) - 1;
             switch (state) {
                 case DOWNLOAD:
-                    //if (Download()) {
+                    xTaskCreate(_puedoEnviar, "task4", 100, NULL, 2, NULL);
+                    if (xSemaphoreTake(xpuedoEnviar, portMAX_DELAY) == pdTRUE) {
+                        USB_sendString("\n\nLISTA DE DATOS DEL GPS\n");
+                    }
                     break;
                 case THRESHOLDS:
-                    definirUmbral();
+                    xTaskCreate(_puedoEnviar, "task4", 100, NULL, 2, NULL);
+                    if (xSemaphoreTake(xpuedoEnviar, portMAX_DELAY) == pdTRUE) {
+                        USB_sendString("\n\nCONFIGURACIÓN DE UMBRALES - Seleccione el umbral que desea configurar\n"
+                                "1 - Movimiento brusco\n"
+                                "2 - Choque\n"
+                                );
+
+                    }
+                    xTaskCreate(puedoRecibir, "task4", 100, NULL, 2, NULL);
+                    if (xSemaphoreTake(xpuedoRecibir, portMAX_DELAY) == pdTRUE) {
+                        umbral = atoi(USB_getRxBuffer()) - 1;
+
+                        switch (umbral) {
+                            case BRUSCO:
+                              /*  xTaskCreate(_puedoEnviar, "task4", 100, NULL, 2, NULL);
+                                if (xSemaphoreTake(xpuedoEnviar, portMAX_DELAY) == pdTRUE) {
+                                    USB_sendString("\n\nConfiguración del umbral para movimiento brusco\n"
+                                            "Gire la perilla del dispositivo hasta el valor que desee, y apriete el botón S2 para indicar que finalizó la configuración\n"
+                                            );
+
+                                }*/
+                                definirUmbral();
+                                //Umbral =  definirUmbral(); 
+                                break;
+                            case CHOQUE:
+                                /*xTaskCreate(_puedoEnviar, "task4", 100, NULL, 2, NULL);
+                                if (xSemaphoreTake(xpuedoEnviar, portMAX_DELAY) == pdTRUE) {
+                                    USB_sendString("\n\nConfiguración del umbral para choque\n"
+                                            "Gire la perilla del dispositivo hasta el valor que desee, y apriete el botón S2 para indicar que finalizó la configuración\n"
+                                            );
+
+                                }*/
+                                definirUmbral();
+                                //Umbral =  definirUmbral();
+                                break;
+
+                        }
+                    }
+
+
                     break;
                 case PERIOD:
-                    //if (Period()) {
+                    xTaskCreate(_puedoEnviar, "task4", 100, NULL, 2, NULL);
+                    if (xSemaphoreTake(xpuedoEnviar, portMAX_DELAY) == pdTRUE) {
+                        USB_sendString("\n\nIngrese el período de logeo del gps (en milisegundos)\n");
+
+                    }
+                    xTaskCreate(puedoRecibir, "task4", 100, NULL, 2, NULL);
+                    if (xSemaphoreTake(xpuedoRecibir, portMAX_DELAY) == pdTRUE) {
+                        //periodo = atoi(USB_getRxBuffer());
+                    }
                     break;
                 default:
                     break;
