@@ -110,5 +110,4 @@ void definirUmbral(void){
         WS2812_send(ledArray, LED_QTY_IN_ARRAY);
         vTaskDelay(pdMS_TO_TICKS(10));
     } while(1);
-    
 }

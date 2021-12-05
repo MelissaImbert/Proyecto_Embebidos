@@ -404,7 +404,6 @@
         <property key="toolpack.updateoptions.packversion"
                   value="Press to select which tool pack to use"/>
       </Tool>
-<<<<<<< Updated upstream
       <item path="platform/buttons.c" ex="true" overriding="false">
         <C32>
         </C32>
@@ -437,8 +436,6 @@
         <C32Global>
         </C32Global>
       </item>
-=======
->>>>>>> Stashed changes
       <snap>
         <property key="ADC 1" value="true"/>
         <property key="AutoSelectMemRanges" value="auto"/>

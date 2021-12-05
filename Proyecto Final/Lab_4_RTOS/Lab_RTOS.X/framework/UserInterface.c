@@ -56,6 +56,7 @@ void interface(void *p_param) {
                     "1 - Descargar datos\n"
                     "2 - Configurar umbrales\n"
                     "3 - Configurar periodo de captura de datos\n");
+
         }
         xTaskCreate(puedoRecibir, "task4", 100, NULL, 2, NULL);
         if (xSemaphoreTake(xpuedoRecibir, portMAX_DELAY) == pdTRUE) {
