@@ -84,7 +84,7 @@ int main(void)
     xTaskCreate( SIM808_taskCheck, "modemTask", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+1, NULL );
     xTaskCreate( ANALOG_convert, "ADC convert", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+4, NULL );
     xTaskCreate( initInterface, "interfaz",  configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+3, NULL );
-    //xTaskCreate( Accel_Testing,"accelerometer", configMINIMAL_STACK_SIZE ,NULL,4,NULL);
+    xTaskCreate( Accel_Testing,"accelerometer", configMINIMAL_STACK_SIZE ,NULL,5, &AccelHandle);
     //xTaskCreate( definirUmbral, "interfaz",  configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+3, NULL );
     //El task de arriba si lo pongo andar el programa muere
     /* Finally start the scheduler. */

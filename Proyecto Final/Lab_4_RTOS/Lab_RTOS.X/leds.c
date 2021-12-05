@@ -1,9 +1,9 @@
 #include "leds.h"
 #include "freeRTOS/include/FreeRTOS.h"
-#include "task.h"
+#include "freeRTOS/include/task.h"
 #include "platform/WS2812.h"
-#include "semphr.h"
-#include "maniobras.h"
+#include "freeRTOS/include/semphr.h"
+#include "framework/umbrales.h"
 
 static ws2812_t ledArray[LED_QTY_IN_ARRAY];
 static ws2812_t ledArray_Black[LED_QTY_IN_ARRAY];

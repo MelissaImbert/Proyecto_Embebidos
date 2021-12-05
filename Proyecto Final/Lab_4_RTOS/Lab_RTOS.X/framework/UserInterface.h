@@ -33,16 +33,16 @@ extern SemaphoreHandle_t xpuedoEnviar;
 extern SemaphoreHandle_t xpuedoRecibir;
 //extern SemaphoreHandle_t xopenInterface;
 
-typedef enum{
-DOWNLOAD,
-THRESHOLDS,
-PERIOD,
-LEAVE
+typedef enum {
+    DOWNLOAD,
+    THRESHOLDS,
+    PERIOD,
+    LEAVE
 } MENU_STATES;
 
-typedef enum{
-BRUSCO,
-CHOQUE
+typedef enum {
+    CHOQUE,
+    BRUSCO
 } MENU_STATES2;
 
 /* This section lists the other files that are included in this file.

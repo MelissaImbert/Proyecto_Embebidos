@@ -4,6 +4,7 @@
 #include "../mcc_generated_files/usb/usb_device_cdc.h"
 #include "umbrales.h"
 #include <stdlib.h>
+#include "../maniobras.h"
 
 SemaphoreHandle_t xpuedoEnviar;
 SemaphoreHandle_t xpuedoRecibir;
@@ -38,14 +39,14 @@ void initInterface(void *p_param) {
         //xSemaphoreTake(xopenInterface, portMAX_DELAY);
         if (USB_isReady()) {
             if (BTN1_GetValue()) {
-
-                while (BTN1_GetValue());
+                // while (BTN1_GetValue());
                 xTaskCreate(interface, "task3", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 3, NULL);
+                vTaskDelete(AccelHandle);
                 vTaskDelete(NULL);
             }
         }
+        vTaskDelay(pdMS_TO_TICKS(10));
     }
-    vTaskDelay(pdMS_TO_TICKS(10));
 }
 
 void interface(void *p_param) {
@@ -76,9 +77,9 @@ void interface(void *p_param) {
                 case THRESHOLDS:
                     xTaskCreate(_puedoEnviar, "task4", 100, NULL, 2, NULL);
                     if (xSemaphoreTake(xpuedoEnviar, portMAX_DELAY) == pdTRUE) {
-                        USB_sendString("\n\nCONFIGURACIÓN DE UMBRALES - Seleccione el umbral que desea configurar\n"
-                                "1 - Movimiento brusco\n"
-                                "2 - Choque\n"
+                        USB_sendString("\n\nCONFIGURACIÓN DE UMBRALES - Seleccione el umbral que desea configurar\nSi es su configuración inicial, por favor seleccione Choque primero\n"
+                                "1 - Choque\n"
+                                "2 - Manejo Brusco\n"
                                 );
 
                     }
@@ -93,9 +94,9 @@ void interface(void *p_param) {
                                       USB_sendString("\n\nConfiguración del umbral para movimiento brusco\n"
                                               "Gire la perilla del dispositivo hasta el valor que desee, y apriete el botón S2 para indicar que finalizó la configuración\n"
                                               );
-
                                   }*/
-                                definirUmbral();
+                                definirUmbral(1);
+                                //xSemaphoreGive(xAccel);
                                 //Umbral =  definirUmbral(); 
                                 break;
                             case CHOQUE:
@@ -104,15 +105,16 @@ void interface(void *p_param) {
                                     USB_sendString("\n\nConfiguración del umbral para choque\n"
                                             "Gire la perilla del dispositivo hasta el valor que desee, y apriete el botón S2 para indicar que finalizó la configuración\n"
                                             );
-
                                 }*/
-                                definirUmbral();
+                                definirUmbral(0);
+                                //xSemaphoreGive(xAccel);
                                 //Umbral =  definirUmbral();
                                 break;
                             default:
+                                //
                                 break;
-
                         }
+
                     }
 
 
@@ -128,8 +130,11 @@ void interface(void *p_param) {
                         //periodo = atoi(USB_getRxBuffer());
                     }
                     break;
-                    //case LEAVE:
-                    // break;
+                case LEAVE:
+                    xTaskCreate(initInterface, "interfaz", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 3, NULL);
+                    xTaskCreate( Accel_Testing,"accelerometer", configMINIMAL_STACK_SIZE ,NULL,5, &AccelHandle);
+                    vTaskDelete(NULL);
+                    break;
 
                 default:
                     break;
