@@ -27,7 +27,7 @@ static ut_tmrDelay_t timer = {.state = UT_TMR_DELAY_INIT};
 
 void data_saving(void *p_param) {
     for (;;) {
-        //data_GPS();
+        data_GPS();
         //Aca se guardaria los datos pero me falta la el buffer jej
         vTaskDelay(pdMS_TO_TICKS(10000));
     }
@@ -35,27 +35,30 @@ void data_saving(void *p_param) {
 
 void data_GPS(void) {
     static uint8_t tramaGPS[110];
-    xSemaphoreTake(c_semGPSIsReady, portMAX_DELAY);
-    if (SIM808_getNMEA(tramaGPS)) {
-        if (SIM808_validateNMEAFrame(tramaGPS)) {
-            GPS_getPosition(&GPSpos, tramaGPS);
-            GPS_getUTC(&GPStime, tramaGPS);
-            if (UT_delayms(&timer, RTCC_ACTUALIZATION)) {
-                // Si pasó el tiempo especificado, actualizo RTCC con los datos del gps
-                RTCC_TimeSet(&GPStime);
+    if (xSemaphoreTake(c_semGPSIsReady, portMAX_DELAY) == pdTRUE) {
+        if (SIM808_getNMEA(tramaGPS)) {
+            if (SIM808_validateNMEAFrame(tramaGPS)) {
+                xSemaphoreGive(c_semGPSIsReady);
+                GPS_getPosition(&GPSpos, tramaGPS);
+                GPS_getUTC(&GPStime, tramaGPS);
+                if (UT_delayms(&timer, RTCC_ACTUALIZATION)) {
+                    // Si pasó el tiempo especificado, actualizo RTCC con los datos del gps
+                    RTCC_TimeSet(&GPStime);
+                }
+            } else {
+                xSemaphoreGive(c_semGPSIsReady);
+                RTCC_TimeGet(&GPStime);
+                GPSpos.latitude = 500;
+                GPSpos.longitude = 500;
             }
         } else {
+            xSemaphoreGive(c_semGPSIsReady);
             RTCC_TimeGet(&GPStime);
             GPSpos.latitude = 500;
             GPSpos.longitude = 500;
         }
-    } else {
-        RTCC_TimeGet(&GPStime);
-        GPSpos.latitude = 500;
-        GPSpos.longitude = 500;
     }
 }
-
 
 /*
   TAMAÑO DE DATOS:

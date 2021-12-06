@@ -80,11 +80,11 @@ int main(void)
     xopenInterface = xSemaphoreCreateBinary();
     /* Create the tasks defined within this file. */
     //xTaskCreate( blinkLED, "task1", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+1, NULL );
-    xTaskCreate( SIM808_initModule, "modemIni", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+2, &modemInitHandle );
-    xTaskCreate( SIM808_taskCheck, "modemTask", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+1, NULL );
+    xTaskCreate( SIM808_initModule, "modemIni", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+7, &modemInitHandle );
+    xTaskCreate( SIM808_taskCheck, "modemTask", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+6, NULL );
     xTaskCreate( ANALOG_convert, "ADC convert", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+4, NULL );
     xTaskCreate( initInterface, "interfaz",  configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+3, NULL );
-    xTaskCreate( Accel_Testing,"accelerometer", configMINIMAL_STACK_SIZE ,NULL,5, &AccelHandle);
+    xTaskCreate( Accel_Testing,"accelerometer", configMINIMAL_STACK_SIZE ,NULL,tskIDLE_PRIORITY+5, &AccelHandle);
     //xTaskCreate( definirUmbral, "interfaz",  configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+3, NULL );
     //El task de arriba si lo pongo andar el programa muere
     /* Finally start the scheduler. */

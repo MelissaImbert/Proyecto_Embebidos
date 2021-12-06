@@ -234,7 +234,7 @@ static void SIM808_initGPS( void* p_param ) {
                     // Se prendió y seteó la trama RMC
                     xSemaphoreGive(c_semIsModuleOnAndReady); /** Libero el semáforo para que otro pueda hablarle al módulo */
                     xSemaphoreGive(c_semGPSIsReady); /** Habilito el uso de GPS */
-                    xTaskCreate(data_saving, "data_saving", configMINIMAL_STACK_SIZE, NULL,3, NULL);                   
+                    xTaskCreate(data_saving, "data_saving", configMINIMAL_STACK_SIZE, NULL,tskIDLE_PRIORITY+3, NULL);                   
                     vTaskDelete(initGPSHandle);
                 }
                 else {
